@@ -1,0 +1,613 @@
+package com.sample
+
+//list any import classes here.
+import cr.entity.Major;
+import cr.entity.Course;
+import cr.entity.Student;
+import cr.data.StudentRecords;
+import cr.data.CourseRecommendation;
+ 
+ 
+ rule "To CSIS Start"
+    when
+        //conditions
+        $CSMajor: Major (code == "CSIS", option == "CS")
+        $StudentRecordsObject: StudentRecords (major == $CSMajor)
+        $recommend: CourseRecommendation (student == $StudentRecordsObject.student)
+        $CSIS161: Course (courseNum == 161, courseCode == "CSIS")
+        $CBE100: Course (courseNum == 100, courseCode == "CBE")
+        $MATH166: Course (courseNum == 166, courseCode == "MATH")
+        $MATH156: Course (courseNum == 156, courseCode == "MATH")
+    then
+        //actions
+        $recommend.getCourseList().add($CSIS161);
+        $recommend.getCourseList().add($CBE100);
+        $recommend.getCourseList().add($MATH166);
+        $recommend.getCourseList().add($MATH156);
+end
+ 
+ 
+ 
+ 
+rule "To CBE 300"
+    when
+        //conditions
+        $CSMajor: Major (code == "CSIS", option == "CS")
+        $StudentRecordsObject: StudentRecords (major == $CSMajor)
+        $recommend: CourseRecommendation (student == $StudentRecordsObject.student)
+        eval($StudentRecordsObject.checkRecord("CBE", 100, 0.1) )
+        $CBE300: Course (courseNum == 300, courseCode == "CBE")
+    then
+        //actions
+        $recommend.getCourseList().add($CBE300);
+end 
+ 
+ 
+ 
+rule "To CSIS 162"
+    when
+        //conditions
+        $CSMajor: Major (code == "CSIS", option == "CS")
+        $StudentRecordsObject: StudentRecords (major == $CSMajor)
+        $recommend: CourseRecommendation (student == $StudentRecordsObject.student)
+        eval($StudentRecordsObject.checkRecord("CSIS", 161, 2.0) )
+        $CSIS162: Course (courseNum == 162, courseCode == "CSIS")
+    then
+        //actions
+        $recommend.getCourseList().add($CSIS162);
+end
+
+rule "To CSIS 247"
+	when
+		//conditions
+		$CSMajor: Major (code == "CSIS", option == "CS")
+		$StudentRecordsObject: StudentRecords (major == $CSMajor)
+        $recommend: CourseRecommendation (student == $StudentRecordsObject.student)
+        eval($StudentRecordsObject.checkRecord("CSIS", 161, 0.1) )
+        $CSIS247: Course (courseNum == 247, courseCode == "CSIS")
+    then
+        //actions
+        $recommend.getCourseList().add($CSIS247);
+end
+
+
+rule "To CSIS 248"
+	when
+		//conditions
+		$CSMajor: Major (code == "CSIS", option == "CS")
+		$StudentRecordsObject: StudentRecords (major == $CSMajor)
+        $recommend: CourseRecommendation (student == $StudentRecordsObject.student)
+        eval($StudentRecordsObject.checkRecord("CSIS", 162, 0.1) )
+        $CSIS248: Course (courseNum == 248, courseCode == "CSIS")
+    then
+        //actions
+        $recommend.getCourseList().add($CSIS248);
+end
+
+
+rule "To CSIS 333"
+	when
+		//conditions
+		$CSMajor: Major (code == "CSIS", option == "CS")
+		$StudentRecordsObject: StudentRecords (major == $CSMajor)
+        $recommend: CourseRecommendation (student == $StudentRecordsObject.student)
+        eval($StudentRecordsObject.checkRecord("CSIS", 162, 0.1) )
+        $CSIS333: Course (courseNum == 333, courseCode == "CSIS")
+    then
+        //actions
+        $recommend.getCourseList().add($CSIS333);
+end
+
+
+rule "To CSIS 225"
+	when
+		//conditions
+		$CSMajor: Major (code == "CSIS", option == "CS")
+		$StudentRecordsObject: StudentRecords (major == $CSMajor)
+        $recommend: CourseRecommendation (student == $StudentRecordsObject.student)
+        eval($StudentRecordsObject.checkRecord("CSIS", 162, 0.1) )
+        $CSIS225: Course (courseNum == 225, courseCode == "CSIS")
+    then
+        //actions
+        $recommend.getCourseList().add($CSIS225);
+end
+
+
+
+rule "To CSIS 235"
+	when
+		//conditions
+		$CSMajor: Major (code == "CSIS", option == "CS")
+		$StudentRecordsObject: StudentRecords (major == $CSMajor)
+        $recommend: CourseRecommendation (student == $StudentRecordsObject.student)
+        eval($StudentRecordsObject.checkRecord("CSIS", 162, 2.0) )
+        $CSIS235: Course (courseNum == 235, courseCode == "CSIS")
+    then
+        //actions
+        $recommend.getCourseList().add($CSIS235);
+end
+
+
+rule "To MATH 236"
+	when
+		//conditions
+		$CSMajor: Major (code == "CSIS", option == "CS")
+		$StudentRecordsObject: StudentRecords (major == $CSMajor)
+        $recommend: CourseRecommendation (student == $StudentRecordsObject.student)
+        eval($StudentRecordsObject.checkRecord("MATH", 166, 0.1) )
+        $MATH236: Course (courseNum == 236, courseCode == "MATH")
+    then
+        //actions
+        $recommend.getCourseList().add($MATH236);
+end
+
+
+rule "To CSIS 435"
+	when
+		//conditions
+		$CSMajor: Major (code == "CSIS", option == "CS")
+		$StudentRecordsObject: StudentRecords (major == $CSMajor)
+        $recommend: CourseRecommendation (student == $StudentRecordsObject.student)
+        eval($StudentRecordsObject.checkRecord("CSIS", 247, 0.1))
+        eval($StudentRecordsObject.checkRecord("CSIS", 248, 0.1))
+        eval($StudentRecordsObject.checkRecord("CSIS", 333, 0.1))
+        $CSIS435: Course (courseNum == 435, courseCode == "CSIS")
+    then
+        //actions
+        $recommend.getCourseList().add($CSIS435);
+end
+
+
+rule "To CSIS 379, 484"
+	when
+		//conditions
+		$CSMajor: Major (code == "CSIS", option == "CS")
+		$StudentRecordsObject: StudentRecords (major == $CSMajor)
+        $recommend: CourseRecommendation (student == $StudentRecordsObject.student)
+        eval($StudentRecordsObject.checkRecord("CSIS", 333, 0.1))
+        eval($StudentRecordsObject.checkRecord("CSIS", 235, 0.1))
+        $CSIS379: Course (courseNum == 379, courseCode == "CSIS")
+        $CSIS484: Course (courseNum == 484, courseCode == "CSIS")
+    then
+        //actions
+        $recommend.getCourseList().add($CSIS379);
+        $recommend.getCourseList().add($CSIS484);
+end
+
+
+
+rule "To CSIS 343"
+	when
+		//conditions
+		$CSMajor: Major (code == "CSIS", option == "CS")
+		$StudentRecordsObject: StudentRecords (major == $CSMajor)
+        $recommend: CourseRecommendation (student == $StudentRecordsObject.student)
+        eval($StudentRecordsObject.checkRecord("CSIS", 235, 0.1) )
+        $CSIS343: Course (courseNum == 343, courseCode == "CSIS")
+    then
+        //actions
+        $recommend.getCourseList().add($CSIS343);
+end
+
+
+
+
+rule "To CSIS 237A"
+	when
+		//conditions
+		$CSMajor: Major (code == "CSIS", option == "CS")
+		$StudentRecordsObject: StudentRecords (major == $CSMajor)
+        $recommend: CourseRecommendation (student == $StudentRecordsObject.student)
+        eval($StudentRecordsObject.checkRecord("CSIS", 235, 2.0) )
+        $CSIS237: Course (courseNum == 237, courseCode == "CSIS")
+    then
+        //actions
+        $recommend.getCourseList().add($CSIS237);
+end
+
+
+
+
+rule "To CSIS 237B"
+	when
+		//conditions
+		$CSMajor: Major (code == "CSIS", option == "CS")
+		$StudentRecordsObject: StudentRecords (major == $CSMajor)
+        $recommend: CourseRecommendation (student == $StudentRecordsObject.student)
+        eval($StudentRecordsObject.checkRecord("CSIS", 162, 3.0))
+        eval($StudentRecordsObject.checkRecord("MATH", 236, 0.1))
+        $CSIS237: Course (courseNum == 237, courseCode == "CSIS")
+    then
+        //actions
+        $recommend.getCourseList().add($CSIS237);
+end
+
+
+
+
+rule "After CSIS 225"
+	when
+		//conditions
+		$CSMajor: Major (code == "CSIS", option == "CS")
+		$StudentRecordsObject: StudentRecords (major == $CSMajor)
+        $recommend: CourseRecommendation (student == $StudentRecordsObject.student)
+        eval($StudentRecordsObject.checkRecord("CSIS", 225, 0.1))
+        $CSIS225: Course (courseNum == 225, courseCode == "CSIS")
+    then
+        //actions
+        $recommend.getCourseList().remove($CSIS225);
+end
+
+
+
+
+rule "After CSIS 435"
+	when
+		//conditions
+		$CSMajor: Major (code == "CSIS", option == "CS")
+		$StudentRecordsObject: StudentRecords (major == $CSMajor)
+        $recommend: CourseRecommendation (student == $StudentRecordsObject.student)
+        eval($StudentRecordsObject.checkRecord("CSIS", 435, 0.1))
+        $CSIS435: Course (courseNum == 435, courseCode == "CSIS")
+    then
+        //actions
+        $recommend.getCourseList().remove($CSIS435);
+end
+
+
+
+
+rule "After CSIS 379"
+	when
+		//conditions
+		$CSMajor: Major (code == "CSIS", option == "CS")
+		$StudentRecordsObject: StudentRecords (major == $CSMajor)
+        $recommend: CourseRecommendation (student == $StudentRecordsObject.student)
+        eval($StudentRecordsObject.checkRecord("CSIS", 379, 0.1))
+        $CSIS379: Course (courseNum == 379, courseCode == "CSIS")
+    then
+        //actions
+        $recommend.getCourseList().remove($CSIS379);
+end
+
+
+
+
+rule "After CSIS 484"
+	when
+		//conditions
+		$CSMajor: Major (code == "CSIS", option == "CS")
+		$StudentRecordsObject: StudentRecords (major == $CSMajor)
+        $recommend: CourseRecommendation (student == $StudentRecordsObject.student)
+        eval($StudentRecordsObject.checkRecord("CSIS", 484, 0.1))
+        $CSIS484: Course (courseNum == 484, courseCode == "CSIS")
+    then
+        //actions
+        $recommend.getCourseList().remove($CSIS484);
+end
+
+
+
+
+rule "To CSIS 630, 631, 634"
+	when
+		//conditions
+		$CSMajor: Major (code == "CSIS", option == "CS")
+		$StudentRecordsObject: StudentRecords (major == $CSMajor)
+        $recommend: CourseRecommendation (student == $StudentRecordsObject.student)
+        eval($StudentRecordsObject.checkRecord("CSIS", 343, 0.1))
+        $CSIS630: Course (courseNum == 630, courseCode == "CSIS")
+        $CSIS631: Course (courseNum == 631, courseCode == "CSIS")
+        $CSIS634: Course (courseNum == 634, courseCode == "CSIS")
+    then
+        //actions
+        $recommend.getCourseList().add($CSIS630);
+        $recommend.getCourseList().add($CSIS631);
+        $recommend.getCourseList().add($CSIS634);
+end
+
+
+
+
+rule "To CSIS 355"
+	when
+		//conditions
+		$CSMajor: Major (code == "CSIS", option == "CS")
+		$StudentRecordsObject: StudentRecords (major == $CSMajor)
+        $recommend: CourseRecommendation (student == $StudentRecordsObject.student)
+        eval($StudentRecordsObject.checkRecord("CSIS", 237, 0.1))
+        $CSIS355: Course (courseNum == 355, courseCode == "CSIS")
+    then
+        //actions
+        $recommend.getCourseList().add($CSIS355);
+end
+
+
+
+
+rule "To CSIS 429"
+	when
+		//conditions
+		$CSMajor: Major (code == "CSIS", option == "CS")
+		$StudentRecordsObject: StudentRecords (major == $CSMajor)
+        $recommend: CourseRecommendation (student == $StudentRecordsObject.student)
+        eval($StudentRecordsObject.checkRecord("CSIS", 355, 0.1))
+        eval($StudentRecordsObject.checkRecord("CSIS", 248, 0.1))
+        $CSIS429: Course (courseNum == 429, courseCode == "CSIS")
+    then
+        //actions
+        $recommend.getCourseList().add($CSIS429);
+end
+
+
+
+rule "After CSIS 429"
+	when
+		//conditions
+		$CSMajor: Major (code == "CSIS", option == "CS")
+		$StudentRecordsObject: StudentRecords (major == $CSMajor)
+        $recommend: CourseRecommendation (student == $StudentRecordsObject.student)
+        eval($StudentRecordsObject.checkRecord("CSIS", 429, 0.1))
+        $CSIS429: Course (courseNum == 429, courseCode == "CSIS")
+    then
+        //actions
+        $recommend.getCourseList().remove($CSIS429);
+end
+
+
+
+rule "After CSIS 634"
+	when
+		//conditions
+		$CSMajor: Major (code == "CSIS", option == "CS")
+		$StudentRecordsObject: StudentRecords (major == $CSMajor)
+        $recommend: CourseRecommendation (student == $StudentRecordsObject.student)
+        eval($StudentRecordsObject.checkRecord("CSIS", 634, 0.1))
+        $CSIS634: Course (courseNum == 634, courseCode == "CSIS")
+    then
+        //actions
+        $recommend.getCourseList().remove($CSIS634);
+end
+
+
+
+rule "After CSIS 630"
+	when
+		//conditions
+		$CSMajor: Major (code == "CSIS", option == "CS")
+		$StudentRecordsObject: StudentRecords (major == $CSMajor)
+        $recommend: CourseRecommendation (student == $StudentRecordsObject.student)
+        eval($StudentRecordsObject.checkRecord("CSIS", 630, 0.1))
+        $CSIS630: Course (courseNum == 630, courseCode == "CSIS")
+    then
+        //actions
+        $recommend.getCourseList().remove($CSIS630);
+end
+
+
+
+rule "After CSIS 631"
+	when
+		//conditions
+		$CSMajor: Major (code == "CSIS", option == "CS")
+		$StudentRecordsObject: StudentRecords (major == $CSMajor)
+        $recommend: CourseRecommendation (student == $StudentRecordsObject.student)
+        eval($StudentRecordsObject.checkRecord("CSIS", 631, 0.1))
+        $CSIS631: Course (courseNum == 631, courseCode == "CSIS")
+    then
+        //actions
+        $recommend.getCourseList().remove($CSIS631);
+end
+
+
+rule "After CBE 100"
+	when
+		//conditions
+		$CSMajor: Major (code == "CSIS", option == "CS")
+		$StudentRecordsObject: StudentRecords (major == $CSMajor)
+        $recommend: CourseRecommendation (student == $StudentRecordsObject.student)
+        eval($StudentRecordsObject.checkRecord("CBE", 100, 0.1))
+        $CBE100: Course (courseNum == 100, courseCode == "CBE")
+    then
+        //actions
+        $recommend.getCourseList().remove($CBE100);
+end
+
+
+rule "After CSIS 161"
+	when
+		//conditions
+		$CSMajor: Major (code == "CSIS", option == "CS")
+		$StudentRecordsObject: StudentRecords (major == $CSMajor)
+        $recommend: CourseRecommendation (student == $StudentRecordsObject.student)
+        eval($StudentRecordsObject.checkRecord("CSIS", 161, 2.0))
+        $CSIS161: Course (courseNum == 161, courseCode == "CSIS")
+    then
+        //actions
+        $recommend.getCourseList().remove($CSIS161);
+end
+
+
+
+rule "After CSIS 162"
+	when
+		//conditions
+		$CSMajor: Major (code == "CSIS", option == "CS")
+		$StudentRecordsObject: StudentRecords (major == $CSMajor)
+        $recommend: CourseRecommendation (student == $StudentRecordsObject.student)
+        eval($StudentRecordsObject.checkRecord("CSIS", 162, 2.0))
+        $CSIS162: Course (courseNum == 162, courseCode == "CSIS")
+    then
+        //actions
+        $recommend.getCourseList().remove($CSIS162);
+end
+
+
+rule "After CBE 300"
+	when
+		//conditions
+		$CSMajor: Major (code == "CSIS", option == "CS")
+		$StudentRecordsObject: StudentRecords (major == $CSMajor)
+        $recommend: CourseRecommendation (student == $StudentRecordsObject.student)
+        eval($StudentRecordsObject.checkRecord("CBE", 300, 0.1))
+        $CBE300: Course (courseNum == 300, courseCode == "CBE")
+    then
+        //actions
+        $recommend.getCourseList().remove($CBE300);
+end
+
+
+rule "After MATH 156"
+	when
+		//conditions
+		$CSMajor: Major (code == "CSIS", option == "CS")
+		$StudentRecordsObject: StudentRecords (major == $CSMajor)
+        $recommend: CourseRecommendation (student == $StudentRecordsObject.student)
+        eval($StudentRecordsObject.checkRecord("MATH", 156, 0.1))
+        $MATH156: Course (courseNum == 156, courseCode == "MATH")
+        $MATH166: Course (courseNum == 166, courseCode == "MATH")
+    then
+        //actions
+        $recommend.getCourseList().remove($MATH156);
+        $recommend.getCourseList().remove($MATH166);
+end
+
+
+
+rule "After MATH 166"
+	when
+		//conditions
+		$CSMajor: Major (code == "CSIS", option == "CS")
+		$StudentRecordsObject: StudentRecords (major == $CSMajor)
+        $recommend: CourseRecommendation (student == $StudentRecordsObject.student)
+        eval($StudentRecordsObject.checkRecord("MATH", 166, 0.1))
+        $MATH156: Course (courseNum == 156, courseCode == "MATH")
+        $MATH166: Course (courseNum == 166, courseCode == "MATH")
+    then
+        //actions
+        $recommend.getCourseList().remove($MATH156);
+        $recommend.getCourseList().remove($MATH166);
+end
+
+
+
+
+rule "After CSIS 247"
+	when
+		//conditions
+		$CSMajor: Major (code == "CSIS", option == "CS")
+		$StudentRecordsObject: StudentRecords (major == $CSMajor)
+        $recommend: CourseRecommendation (student == $StudentRecordsObject.student)
+        eval($StudentRecordsObject.checkRecord("CSIS", 247, 0.1))
+        $CSIS247: Course (courseNum == 247, courseCode == "CSIS")
+    then
+        //actions
+        $recommend.getCourseList().remove($CSIS247);
+end
+
+
+
+rule "After CSIS 248"
+	when
+		//conditions
+		$CSMajor: Major (code == "CSIS", option == "CS")
+		$StudentRecordsObject: StudentRecords (major == $CSMajor)
+        $recommend: CourseRecommendation (student == $StudentRecordsObject.student)
+        eval($StudentRecordsObject.checkRecord("CSIS", 248, 0.1))
+        $CSIS248: Course (courseNum == 248, courseCode == "CSIS")
+    then
+        //actions
+        $recommend.getCourseList().remove($CSIS248);
+end
+
+
+
+rule "After CSIS 333"
+	when
+		//conditions
+		$CSMajor: Major (code == "CSIS", option == "CS")
+		$StudentRecordsObject: StudentRecords (major == $CSMajor)
+        $recommend: CourseRecommendation (student == $StudentRecordsObject.student)
+        eval($StudentRecordsObject.checkRecord("CSIS", 333, 0.1))
+        $CSIS333: Course (courseNum == 333, courseCode == "CSIS")
+    then
+        //actions
+        $recommend.getCourseList().remove($CSIS333);
+end
+
+
+
+rule "After CSIS 235"
+	when
+		//conditions
+		$CSMajor: Major (code == "CSIS", option == "CS")
+		$StudentRecordsObject: StudentRecords (major == $CSMajor)
+        $recommend: CourseRecommendation (student == $StudentRecordsObject.student)
+        eval($StudentRecordsObject.checkRecord("CSIS", 235, 2.0))
+        $CSIS235: Course (courseNum == 235, courseCode == "CSIS")
+    then
+        //actions
+        $recommend.getCourseList().remove($CSIS235);
+end
+
+
+
+rule "After MATH 236"
+	when
+		//conditions
+		$CSMajor: Major (code == "CSIS", option == "CS")
+		$StudentRecordsObject: StudentRecords (major == $CSMajor)
+        $recommend: CourseRecommendation (student == $StudentRecordsObject.student)
+        eval($StudentRecordsObject.checkRecord("MATH", 236, 0.1))
+        $MATH236: Course (courseNum == 236, courseCode == "MATH")
+    then
+        //actions
+        $recommend.getCourseList().remove($MATH236);
+end
+
+
+
+rule "After CSIS 343"
+	when
+		//conditions
+		$CSMajor: Major (code == "CSIS", option == "CS")
+		$StudentRecordsObject: StudentRecords (major == $CSMajor)
+        $recommend: CourseRecommendation (student == $StudentRecordsObject.student)
+        eval($StudentRecordsObject.checkRecord("CSIS", 343, 0.1))
+        $CSIS343: Course (courseNum == 343, courseCode == "CSIS")
+    then
+        //actions
+        $recommend.getCourseList().remove($CSIS343);
+end
+
+
+
+
+rule "After CSIS 237"
+	when
+		//conditions
+		$CSMajor: Major (code == "CSIS", option == "CS")
+		$StudentRecordsObject: StudentRecords (major == $CSMajor)
+        $recommend: CourseRecommendation (student == $StudentRecordsObject.student)
+        eval($StudentRecordsObject.checkRecord("CSIS", 237, 0.1))
+        $CSIS237: Course (courseNum == 237, courseCode == "CSIS")
+    then
+        //actions
+        $recommend.getCourseList().remove($CSIS237);
+end
+
+
+
+
+rule "After CSIS 355"
+	when
+		//conditions
+		$CSMajor: Major (code == "CSIS", option == "CS")
+		$StudentRecordsObject: StudentRecords (major == $CSMajor)
+        $recommend: CourseRecommendation (student == $StudentRecordsObject.student)
+        eval($StudentRecordsObject.checkRecord("CSIS", 355, 0.1))
+        $CSIS355: Course (courseNum == 355, courseCode == "CSIS")
+    then
+        //actions
+        $recommend.getCourseList().remove($CSIS355);
+end
