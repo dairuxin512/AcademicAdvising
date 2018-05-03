@@ -1,0 +1,8 @@
+Author: Brady Lange
+5/3/18
+This document is ideas for algorithms to develop for this software.
+
+- Typing in a career choice and showing my must take classes
+- Suggesting minors/majors that would would be easy to get with the course load I had (so the one course could serve two purposes).
+- Pairing courses together that weren't so heavy so you could have some hard and some easy courses in on course load. 
+- Suggests courses that would be beneficial to your particular interest in that field AND which would be most beneficial in everyday use. 
